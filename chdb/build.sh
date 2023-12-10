@@ -127,7 +127,7 @@ echo ${LIBCHDB_CMD} > libchdb_cmd.sh.origin
 LIBCHDB_CMD=$(gawk '{for(i=1;i<NF;i++){if ($i !~ /\.o$/){printf "%s ", $i}}}END{printf "\n"}' libchdb_cmd.sh.origin)
 # generate libchdb.a
 object_list=$(gawk '{for(i=0;i<NF;i++){if ($i ~ /\.o$/){printf "%s ", $i}}}END{printf "\n"}' libchdb_cmd.sh.origin)
-LIBCHDB_STATIC_CMD=$(echo "llvm-ar-15 rsc libchdb.a ${object_list}")
+LIBCHDB_STATIC_CMD=$(echo "llvm-ar-16 rsc libchdb.a ${object_list}")
 echo ${LIBCHDB_STATIC_CMD} > libchdb_static.sh
 # generate chdb.a
 temp_working_dir=$(mktemp --directory)
@@ -178,7 +178,7 @@ rm -rf ${temp_working_dir}
 EOF
 #------ generate script to create chdb.a   end--------
 
-LIBCHDB_CMD=$(echo ${LIBCHDB_CMD} | gawk '{for(i=1;i<NF;i++){if ($i !~ /\.a$/){printf "%s ", $i; if ($i ~ /_chdb.cpython-38-x86_64-linux-gnu.so/){printf "chdb.a "}}}}END{printf "\n"}')
+LIBCHDB_CMD=$(echo ${LIBCHDB_CMD} | gawk '{for(i=1;i<NF;i++){if ($i !~ /\.a$/){printf "%s ", $i; if ($i ~ /_chdb.cpython-3.-x86_64-linux-gnu.so/){printf "chdb.a "}}}}END{printf "\n"}')
 
 echo ${LIBCHDB_CMD} > libchdb_cmd.sh
 
